@@ -52,6 +52,6 @@ Web development is changing. We used to render all of our views and templates on
 
 We will do a lot more than just build a simple CRUD REST API like many other Node.js and Express tutorials. We will be implementing reset tokens, email Irse teaches what authentication, role functionality, geoc It has Slided to the bottom it's like to be a real backend engineer.
 
-<img width="781" height="770" alt="Screenshot 2025-10-18 at 7 06 25 PM" src="https://github.com/user-attachments/assets/928a2782-9fa4-4892-8cda-772775472175" />
+<img width="1463" height="860" alt="Screenshot 2025-10-18 at 10 33 21 PM" src="https://github.com/user-attachments/assets/aab0c84b-0595-41fb-aa0d-031db1f8a829" />
 
 
