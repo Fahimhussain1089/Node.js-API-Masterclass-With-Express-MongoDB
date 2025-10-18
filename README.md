@@ -51,3 +51,7 @@ Deployment With PM2, NGINX, SSL
 Web development is changing. We used to render all of our views and templates on the server, but since the rise of frontend frameworks like React, Angular and Vue, we are now splitting projects up into backend and frontend, where the backend is doing all of the database interaction and serving JSON and the frontend is fetching that data and creating the user interface to interact with. This course will teach you the entire backend side of things so that you can build extensive APIs and then use whatever you want on the frontend.
 
 We will do a lot more than just build a simple CRUD REST API like many other Node.js and Express tutorials. We will be implementing reset tokens, email Irse teaches what authentication, role functionality, geoc It has Slided to the bottom it's like to be a real backend engineer.
+
+<img width="781" height="770" alt="Screenshot 2025-10-18 at 7 06 25 PM" src="https://github.com/user-attachments/assets/928a2782-9fa4-4892-8cda-772775472175" />
+
+
