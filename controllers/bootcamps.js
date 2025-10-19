@@ -1,3 +1,6 @@
+const path = require('path');
+const fs = require('fs'); // Add fs module for file system operations
+
 const Bootcamp = require('../models/Bootcamp');
 const ErrorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middleware/async');
@@ -38,116 +41,117 @@ const geocoder = require('../utils/geocoder');
 //@route   GET /api/v1/bootcamps
 //@access  Public
 exports.getBootcamps = asyncHandler(async (req, res, next) => {
-    let query;
+    res.status(200).json(res.advancedResults);
+    // let query;
     
-    // Copy req.query
-    const reqQuery = { ...req.query };
+    // // Copy req.query
+    // const reqQuery = { ...req.query };
     
-    // Fields to exclude from filtering (used for other operations)
-    const removeFields = ['select', 'sort', 'page', 'limit'];
+    // // Fields to exclude from filtering (used for other operations)
+    // const removeFields = ['select', 'sort', 'page', 'limit'];
     
-    // Loop over removeFields and delete them from reqQuery
-    removeFields.forEach(param => delete reqQuery[param]);
+    // // Loop over removeFields and delete them from reqQuery
+    // removeFields.forEach(param => delete reqQuery[param]);
     
-    // MANUAL PARSING FOR SQUARE BRACKET NOTATION (for filtering)
-    let queryObj = {};
+    // // MANUAL PARSING FOR SQUARE BRACKET NOTATION (for filtering)
+    // let queryObj = {};
     
-    for (let key in reqQuery) {
-        // Check if key contains square brackets (e.g., "averageCost[lt]")
-        if (key.includes('[') && key.includes(']')) {
-            const fieldName = key.split('[')[0]; // "averageCost"
-            const operator = key.split('[')[1].split(']')[0]; // "lt"
-            const value = reqQuery[key];
+    // for (let key in reqQuery) {
+    //     // Check if key contains square brackets (e.g., "averageCost[lt]")
+    //     if (key.includes('[') && key.includes(']')) {
+    //         const fieldName = key.split('[')[0]; // "averageCost"
+    //         const operator = key.split('[')[1].split(']')[0]; // "lt"
+    //         const value = reqQuery[key];
             
-            // Initialize field if it doesn't exist
-            if (!queryObj[fieldName]) {
-                queryObj[fieldName] = {};
-            }
+    //         // Initialize field if it doesn't exist
+    //         if (!queryObj[fieldName]) {
+    //             queryObj[fieldName] = {};
+    //         }
             
-            // Convert value to number if it's a numeric string
-            const numericValue = isNaN(value) ? value : Number(value);
-            queryObj[fieldName][`$${operator}`] = numericValue;
-        } else {
-            // Regular field (e.g., "housing=true")
-            queryObj[key] = isNaN(reqQuery[key]) ? reqQuery[key] : Number(reqQuery[key]);
-        }
-    }
+    //         // Convert value to number if it's a numeric string
+    //         const numericValue = isNaN(value) ? value : Number(value);
+    //         queryObj[fieldName][`$${operator}`] = numericValue;
+    //     } else {
+    //         // Regular field (e.g., "housing=true")
+    //         queryObj[key] = isNaN(reqQuery[key]) ? reqQuery[key] : Number(reqQuery[key]);
+    //     }
+    // }
     
-    console.log(
-        '📍 Query Parameters:'.green.bold + 
-        JSON.stringify(req.query, null, 2).yellow + 
-        "\n \n 🔍 Parsed Query Object:".green.bold + 
-        JSON.stringify(queryObj, null, 2).cyan +
-        "\n \n 🎯 Select Fields:".green.bold + 
-        (req.query.select || 'all fields').magenta +
-        "\n \n 📊 Pagination:".green.bold + 
-        `page: ${req.query.page || 1}, limit: ${req.query.limit || 'none'}`.blue +
-        "\n\n"
-    );
+    // console.log(
+    //     '📍 Query Parameters:'.green.bold + 
+    //     JSON.stringify(req.query, null, 2).yellow + 
+    //     "\n \n 🔍 Parsed Query Object:".green.bold + 
+    //     JSON.stringify(queryObj, null, 2).cyan +
+    //     "\n \n 🎯 Select Fields:".green.bold + 
+    //     (req.query.select || 'all fields').magenta +
+    //     "\n \n 📊 Pagination:".green.bold + 
+    //     `page: ${req.query.page || 1}, limit: ${req.query.limit || 'none'}`.blue +
+    //     "\n\n"
+    // );
 
-    // Find bootcamps with the parsed query object (FILTERING)
-    query = Bootcamp.find(queryObj).populate('courses');
+    // // Find bootcamps with the parsed query object (FILTERING)
+    // query = Bootcamp.find(queryObj).populate('courses');
 
-    // SELECT FIELDS
-    if (req.query.select) {
-        const fields = req.query.select.split(',').join(' ');
-        console.log('🎯 Selecting fields:'.blue.bold, fields.blue);
-        query = query.select(fields);
-    }
+    // // SELECT FIELDS
+    // if (req.query.select) {
+    //     const fields = req.query.select.split(',').join(' ');
+    //     console.log('🎯 Selecting fields:'.blue.bold, fields.blue);
+    //     query = query.select(fields);
+    // }
 
-    // SORT
-    if (req.query.sort) {
-        const sortBy = req.query.sort.split(',').join(' ');
-        console.log('📊 Sorting by:'.blue.bold, sortBy.blue);
-        query = query.sort(sortBy);
-    } else {
-        query = query.sort('-createdAt'); // Default sort by newest first
-    }
+    // // SORT
+    // if (req.query.sort) {
+    //     const sortBy = req.query.sort.split(',').join(' ');
+    //     console.log('📊 Sorting by:'.blue.bold, sortBy.blue);
+    //     query = query.sort(sortBy);
+    // } else {
+    //     query = query.sort('-createdAt'); // Default sort by newest first
+    // }
 
-    // PAGINATION - IMPLEMENT THIS PART
-    const page = parseInt(req.query.page, 10) || 1;
-    const limit = parseInt(req.query.limit, 10) || 0; // 0 means no limit
-    const startIndex = (page - 1) * limit;
+    // // PAGINATION - IMPLEMENT THIS PART
+    // const page = parseInt(req.query.page, 10) || 1;
+    // const limit = parseInt(req.query.limit, 10) || 0; // 0 means no limit
+    // const startIndex = (page - 1) * limit;
     
-    if (limit > 0) {
-        query = query.skip(startIndex).limit(limit);
-        console.log('📄 Pagination applied:'.blue.bold, `skip: ${startIndex}, limit: ${limit}`.blue);
-    }
+    // if (limit > 0) {
+    //     query = query.skip(startIndex).limit(limit);
+    //     console.log('📄 Pagination applied:'.blue.bold, `skip: ${startIndex}, limit: ${limit}`.blue);
+    // }
 
-    // EXECUTE QUERY
-    const bootcamps = await query;
+    // // EXECUTE QUERY
+    // const bootcamps = await query;
     
-    // COUNT TOTAL DOCUMENTS (for pagination info)
-    const total = await Bootcamp.countDocuments(queryObj);
+    // // COUNT TOTAL DOCUMENTS (for pagination info)
+    // const total = await Bootcamp.countDocuments(queryObj);
     
-    // PAGINATION RESULT
-    const pagination = {};
-    if (limit > 0) {
-        if (startIndex + limit < total) {
-            pagination.next = {
-                page: page + 1,
-                limit: limit
-            };
-        }
+    // // PAGINATION RESULT
+    // const pagination = {};
+    // if (limit > 0) {
+    //     if (startIndex + limit < total) {
+    //         pagination.next = {
+    //             page: page + 1,
+    //             limit: limit
+    //         };
+    //     }
         
-        if (startIndex > 0) {
-            pagination.prev = {
-                page: page - 1,
-                limit: limit
-            };
-        }
+    //     if (startIndex > 0) {
+    //         pagination.prev = {
+    //             page: page - 1,
+    //             limit: limit
+    //         };
+    //     }
         
-        pagination.totalPages = Math.ceil(total / limit);
-        pagination.currentPage = page;
-        pagination.total = total;
-    }
+    //     pagination.totalPages = Math.ceil(total / limit);
+    //     pagination.currentPage = page;
+    //     pagination.total = total;
+    // }
     
-    res.status(200).json({
-        success: true,
-        count: bootcamps.length, // This will now show the actual returned count
-        pagination: Object.keys(pagination).length > 0 ? pagination : undefined,
-        data: bootcamps
-    });
+    // res.status(200).json({
+    //     success: true,
+    //     count: bootcamps.length, // This will now show the actual returned count
+    //     pagination: Object.keys(pagination).length > 0 ? pagination : undefined,
+    //     data: bootcamps
+    // });
 });
 
 
@@ -315,3 +319,94 @@ exports.getBootcampsInRadius = asyncHandler(async (req, res, next) => {
     });
 });
 //-- IGNORE ---
+
+//----------------------------------End----------------------------------
+//@desc    Upload photo for bootcamp
+//@route   PUT /api/v1/bootcamps/:id/photo
+//@access  Private
+
+// exports.bootcampPhotoUpload = asyncHandler(async (req, res,next) => {
+//     const bootcamp = await Bootcamp.findById(req.params.id);
+//     if(!bootcamp){
+//         return next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404));
+//     }
+//     if(!req.files){
+//         return next(new ErrorResponse(`Please upload a file`,400));
+//     }
+//     const file = req.files.file;
+
+//     //Make sure the image is a photo
+//     if(!file.mimetype.startsWith('image')){
+//         return next(new ErrorResponse(`Please upload an image file`,400));
+//     }
+
+//     //Check filesize
+//     if(file.size > process.env.MAX_FILE_UPLOAD){
+//         return next(new ErrorResponse(`Please upload an image less than ${process.env.MAX_FILE_UPLOAD}`,400));
+//     }
+
+//     //Create custom filename
+//     file
+//     .name = `photo_${bootcamp._id}${path.parse(file.name).ext}`;
+
+//     file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async err => {
+//         if (err) {
+//             console.error(err);
+//             return next(new ErrorResponse(`Problem with file upload`, 500));
+//         }
+
+//         await Bootcamp.findByIdAndUpdate(req.params.id, { photo: file.name });
+
+//         res.status(200).json({
+//             success: true,
+//             data: file.name
+//         });
+//     }
+//     );
+//     console.log(req.files);
+// }
+// );
+
+exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
+    const bootcamp = await Bootcamp.findById(req.params.id);
+    if (!bootcamp) {
+        return next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404));
+    }
+    
+    if (!req.files) {
+        return next(new ErrorResponse(`Please upload a file`, 400));
+    }
+    
+    const file = req.files.file;
+
+    // Make sure the image is a photo
+    if (!file.mimetype.startsWith('image')) {
+        return next(new ErrorResponse(`Please upload an image file`, 400));
+    }
+
+    // Check filesize
+    if (file.size > process.env.MAX_FILE_UPLOAD) {
+        return next(new ErrorResponse(`Please upload an image less than ${process.env.MAX_FILE_UPLOAD}`, 400));
+    }
+
+    // Create custom filename
+    file.name = `photo_${bootcamp._id}${path.parse(file.name).ext}`;
+
+    // Make sure upload directory exists
+    const uploadPath = process.env.FILE_UPLOAD_PATH || './public/uploads';
+    
+    file.mv(`${uploadPath}/${file.name}`, async err => {
+        if (err) {
+            console.error(err);
+            return next(new ErrorResponse(`Problem with file upload`, 500));
+        }
+
+        await Bootcamp.findByIdAndUpdate(req.params.id, { photo: file.name });
+
+        res.status(200).json({
+            success: true,
+            data: file.name
+        });
+    });
+    console.log(req.files.file);
+});

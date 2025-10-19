@@ -1,11 +1,11 @@
 // Mount file routes file 
-
+const path = require('path');
 const express = require('express');
 const dotenv  = require('dotenv');
-// const logger =  require('./middleware/logger');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
 const colors = require('colors');
+const fileUpload = require('express-fileupload');
 const errorHandler = require('./middleware/error');
 const bootcamps = require('./routes/bootcamps');
 const courses = require('./routes/courses');
@@ -31,6 +31,11 @@ if(process.env.NODE_ENV === 'development'){
     app.use(morgan('dev'));
 
 }
+//File upload
+app.use(fileUpload());
+app.use(express.static(path.join(__dirname, 'public')));
+
+
 //+++++++++++++++++++
 
 // Mount routers
