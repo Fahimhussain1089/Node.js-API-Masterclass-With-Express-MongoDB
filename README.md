@@ -64,4 +64,6 @@ We will do a lot more than just build a simple CRUD REST API like many other Nod
 
 <img width="1204" height="907" alt="Screenshot 2025-10-19 at 12 51 35 PM" src="https://github.com/user-attachments/assets/4dd63d5d-1e2d-48e0-8285-4a4a11ab7d70" />
 
+<img width="1415" height="911" alt="Screenshot 2025-10-19 at 3 54 30 PM" src="https://github.com/user-attachments/assets/6cf68197-b22f-4ff7-b557-932970cae271" />
+<img width="1210" height="809" alt="Screenshot 2025-10-19 at 3 55 17 PM" src="https://github.com/user-attachments/assets/9339de84-db12-4628-ada0-fc30047a2a1d" />
 
