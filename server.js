@@ -5,6 +5,8 @@ const dotenv  = require('dotenv');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
 const colors = require('colors');
+const errorHandler = require('./middleware/error');
+
 
 
 
@@ -36,6 +38,17 @@ if(process.env.NODE_ENV === 'development'){
 
 // Mount routers
 app.use('/api/v1/bootcamps', bootcamps); 
+
+app.use(errorHandler);
+
+//-------------Testing server ----------------
+// Load env vars first
+require('dotenv').config({ path: './config/config.env' });
+
+// Debug: Check if environment variables are loaded
+console.log('GEOCODER_API_KEY:', process.env.GEOCODER_API_KEY ? 'Loaded' : 'NOT LOADED');
+console.log('MONGO_URI:', process.env.MONGO_URI ? 'Loaded' : 'NOT LOADED');
+
 
 
 
