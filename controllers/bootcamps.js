@@ -9,11 +9,147 @@ const geocoder = require('../utils/geocoder');
 //@route   GET /api/v1/bootcamps
 //@access  Public
 
-exports.getBootcamps =asyncHandler(async(req, res,next) => {
-    const bootcamps = await Bootcamp.find();
-    res.status(200).json({success: true ,count:bootcamps.lenght , data: bootcamps});
+// exports.getBootcamps =asyncHandler(async(req, res,next) => {
+//     let query;
+//     let queryStr = JSON.stringify(req.query);
+//     queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, match => `$${match}`);
+
+//     // console.log('apki location: ', req.query,"\n \n QueryString :",queryStr ,"\n\n");//apki location:  [Object: null prototype] { 'location.state': 'MA', housing: 'true' }
+//     console.log(
+//         'apki location: '.green.bold + 
+//         JSON.stringify(req.query, null, 2).yellow + 
+//         "\n \n QueryString :".green.bold + 
+//         queryStr.yellow + 
+//         "\n\n"
+//     );
+
+//     query = Bootcamp.find(JSON.parse(queryStr))
+
+//     const bootcamps = await query;
+//     // Bootcamp.find(
+        
+//     // //    req.query
+//     // );
+//     res.status(200).json({success: true ,count:bootcamps.lenght , data: bootcamps});
     
+// });
+
+//@desc    Get all bootcamps
+//@route   GET /api/v1/bootcamps
+//@access  Public
+exports.getBootcamps = asyncHandler(async (req, res, next) => {
+    let query;
+    
+    // Copy req.query
+    const reqQuery = { ...req.query };
+    
+    // Fields to exclude from filtering (used for other operations)
+    const removeFields = ['select', 'sort', 'page', 'limit'];
+    
+    // Loop over removeFields and delete them from reqQuery
+    removeFields.forEach(param => delete reqQuery[param]);
+    
+    // MANUAL PARSING FOR SQUARE BRACKET NOTATION (for filtering)
+    let queryObj = {};
+    
+    for (let key in reqQuery) {
+        // Check if key contains square brackets (e.g., "averageCost[lt]")
+        if (key.includes('[') && key.includes(']')) {
+            const fieldName = key.split('[')[0]; // "averageCost"
+            const operator = key.split('[')[1].split(']')[0]; // "lt"
+            const value = reqQuery[key];
+            
+            // Initialize field if it doesn't exist
+            if (!queryObj[fieldName]) {
+                queryObj[fieldName] = {};
+            }
+            
+            // Convert value to number if it's a numeric string
+            const numericValue = isNaN(value) ? value : Number(value);
+            queryObj[fieldName][`$${operator}`] = numericValue;
+        } else {
+            // Regular field (e.g., "housing=true")
+            queryObj[key] = isNaN(reqQuery[key]) ? reqQuery[key] : Number(reqQuery[key]);
+        }
+    }
+    
+    console.log(
+        '📍 Query Parameters:'.green.bold + 
+        JSON.stringify(req.query, null, 2).yellow + 
+        "\n \n 🔍 Parsed Query Object:".green.bold + 
+        JSON.stringify(queryObj, null, 2).cyan +
+        "\n \n 🎯 Select Fields:".green.bold + 
+        (req.query.select || 'all fields').magenta +
+        "\n \n 📊 Pagination:".green.bold + 
+        `page: ${req.query.page || 1}, limit: ${req.query.limit || 'none'}`.blue +
+        "\n\n"
+    );
+
+    // Find bootcamps with the parsed query object (FILTERING)
+    query = Bootcamp.find(queryObj).populate('courses');
+
+    // SELECT FIELDS
+    if (req.query.select) {
+        const fields = req.query.select.split(',').join(' ');
+        console.log('🎯 Selecting fields:'.blue.bold, fields.blue);
+        query = query.select(fields);
+    }
+
+    // SORT
+    if (req.query.sort) {
+        const sortBy = req.query.sort.split(',').join(' ');
+        console.log('📊 Sorting by:'.blue.bold, sortBy.blue);
+        query = query.sort(sortBy);
+    } else {
+        query = query.sort('-createdAt'); // Default sort by newest first
+    }
+
+    // PAGINATION - IMPLEMENT THIS PART
+    const page = parseInt(req.query.page, 10) || 1;
+    const limit = parseInt(req.query.limit, 10) || 0; // 0 means no limit
+    const startIndex = (page - 1) * limit;
+    
+    if (limit > 0) {
+        query = query.skip(startIndex).limit(limit);
+        console.log('📄 Pagination applied:'.blue.bold, `skip: ${startIndex}, limit: ${limit}`.blue);
+    }
+
+    // EXECUTE QUERY
+    const bootcamps = await query;
+    
+    // COUNT TOTAL DOCUMENTS (for pagination info)
+    const total = await Bootcamp.countDocuments(queryObj);
+    
+    // PAGINATION RESULT
+    const pagination = {};
+    if (limit > 0) {
+        if (startIndex + limit < total) {
+            pagination.next = {
+                page: page + 1,
+                limit: limit
+            };
+        }
+        
+        if (startIndex > 0) {
+            pagination.prev = {
+                page: page - 1,
+                limit: limit
+            };
+        }
+        
+        pagination.totalPages = Math.ceil(total / limit);
+        pagination.currentPage = page;
+        pagination.total = total;
+    }
+    
+    res.status(200).json({
+        success: true,
+        count: bootcamps.length, // This will now show the actual returned count
+        pagination: Object.keys(pagination).length > 0 ? pagination : undefined,
+        data: bootcamps
+    });
 });
+
 
 
 //@desc    Get single bootcamps
@@ -67,6 +203,8 @@ exports.deleteBootcamp =asyncHandler( async (req, res,next) => {
             // return res.status(400).json({success:false});
             return next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404));
         }
+        bootcamp.remove();
+        
     res.status(200).json({success:true ,data:{}});
 });
 

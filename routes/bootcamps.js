@@ -11,8 +11,16 @@ const {
     
 } = require('../controllers/bootcamps');
 
+// Include other resource routers
+// const courseRouter = require('./courses'); --- IGNORE ---
+const courseRouter = require('./courses');
+const router = express.Router();
 
-const router  = express.Router();
+// Merge params to get access to bootcampId in course routes
+// Re-route into other resource routers
+router.use('/:bootcampId/courses', courseRouter);
+
+
 
 router.route('/radius/:zipcode/:distance').get(getBootcampsInRadius);
 router.route('/debug/locations').get(getBootcampsDebug);//--- IGNORE ---

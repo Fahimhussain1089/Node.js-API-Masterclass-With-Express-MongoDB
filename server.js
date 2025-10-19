@@ -1,3 +1,4 @@
+// Mount file routes file 
 
 const express = require('express');
 const dotenv  = require('dotenv');
@@ -6,12 +7,8 @@ const morgan = require('morgan');
 const connectDB = require('./config/db');
 const colors = require('colors');
 const errorHandler = require('./middleware/error');
-
-
-
-
-// Mount file
 const bootcamps = require('./routes/bootcamps');
+const courses = require('./routes/courses');
 
 //------
 dotenv.config({ path: './config/config.env' });
@@ -38,6 +35,8 @@ if(process.env.NODE_ENV === 'development'){
 
 // Mount routers
 app.use('/api/v1/bootcamps', bootcamps); 
+app.use('/api/v1/courses', courses);
+
 
 app.use(errorHandler);
 
