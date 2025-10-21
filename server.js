@@ -8,12 +8,18 @@ const connectDB = require('./config/db');
 const colors = require('colors');
 const fileUpload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
+// const mongoSanitize = require('express-mongo-sanitize');
+// const helmet = require('helmet');
+// const xss = require('xss-clean');
+// const  rateLimit = require('express-rate-limit');
+const hpp = require('hpp');
 const errorHandler = require('./middleware/error');
 const bootcamps = require('./routes/bootcamps');
 const courses = require('./routes/courses');
 const auth = require('./routes/auth');
 const users= require('./routes/users');
 const reviews = require('./routes/reviews');
+const { default: rateLimit } = require('express-rate-limit');
 
 
 //------
@@ -39,6 +45,53 @@ if(process.env.NODE_ENV === 'development'){
     app.use(morgan('dev'));
 
 }
+
+// Sanitize data
+// app.use(mongoSanitize());
+// Set security headers
+// app.use(helmet());
+
+//___________replacement of mongoSanitize Start
+
+//prevent NoSQL injection attacks
+// app.use(xss());
+
+// Rate limiting
+const limiter = rateLimit({
+    windowMs: 10 * 60 * 1000, // 10 minutes
+    max: 100
+});
+app.use(limiter);
+
+// Prevent http param pollution
+app.use(hpp());
+
+
+// Custom NoSQL injection protection (use this instead)
+app.use((req, res, next) => {
+  // Simple NoSQL injection protection
+  const sanitize = (obj) => {
+    if (obj && typeof obj === 'object') {
+      Object.keys(obj).forEach(key => {
+        if (key.startsWith('$') || key.includes('.')) {
+          delete obj[key];
+        } else if (typeof obj[key] === 'object') {
+          sanitize(obj[key]);
+        }
+      });
+    }
+  };
+
+  ['body', 'query', 'params'].forEach(key => {
+    if (req[key]) {
+      sanitize(req[key]);
+    }
+  });
+
+  next();
+});
+//_________________replacement of mongoSanitize End
+
 //File upload
 app.use(fileUpload());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -74,6 +127,7 @@ console.log('SMTP_HOST:', process.env.SMTP_HOST);
 console.log('SMTP_PORT:', process.env.SMTP_PORT);
 console.log('SMTP_USER:', process.env.SMTP_USER ? '***' : 'undefined');
 // ... rest of your server code
+
 
 
 
