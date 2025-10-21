@@ -17,6 +17,7 @@ const Bootcamp = require('../models/Bootcamp');
 // Include other resource routers
 // const courseRouter = require('./courses'); --- IGNORE ---
 const courseRouter = require('./courses');
+const reviewRouter = require('./reviews');
 const router = express.Router();
 
 // Merge params to get access to bootcampId in course routes
@@ -27,6 +28,7 @@ const { protect, authorize } = require('../middleware/auth');
 
 // Apply protect middleware to all bootcamp routes-------------------
 router.use('/:bootcampId/courses', courseRouter);
+router.use('/:bootcampId/reviews', reviewRouter);
 
 router.route('/:id/photo').put( protect ,authorize('publisher','admin'), bootcampPhotoUpload );
 
