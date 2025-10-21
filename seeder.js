@@ -5,6 +5,8 @@ const Bootcamp = require('./models/Bootcamp');
 const dotenv = require('dotenv');
 const geocoder = require('./utils/geocoder'); // Add this
 const Course = require('./models/Course');
+const User = require('./models/User');
+
 
 
 
@@ -31,6 +33,11 @@ const bootcamps = JSON.parse(
 const courses = JSON.parse(
     fs.readFileSync(`${__dirname}/_data/courses.json`, 'utf-8')
 );
+const users = JSON.parse(
+    fs
+        .readFileSync(`${__dirname}/_data/users.json`, 'utf-8')
+);
+
 
 
 //____________________Start Geocoding____________________
@@ -247,15 +254,37 @@ const importData = async () => {
         // Delete existing data first
         await Bootcamp.deleteMany();
         await Course.deleteMany();
+        await User.deleteMany(); // Also clear users
         console.log('🗑️ Old data deleted...'.red);
         
         let bootcampImportedCount = 0;
         let courseImportedCount = 0;
+        let userImportedCount = 0; // ← THIS WAS MISSING!
+
         
         // Store mapping of old bootcamp IDs to new bootcamp IDs
         const bootcampIdMap = {};
+
+
+        // 1. FIRST IMPORT USERS (This is what's missing!)
+        console.log('👤 Importing users...'.blue);
+        for (let i = 0; i < users.length; i++) {
+            try {
+                const userData = users[i];
+                
+                // Remove the fixed _id to let MongoDB generate a new one
+                const { _id, ...userWithoutId } = userData;
+                
+                await User.create(userWithoutId);
+                userImportedCount++;
+                console.log(`✅ Imported user: ${userData.name} (${userData.email})`);
+                
+            } catch (error) {
+                console.log(`❌ Failed to import user ${users[i].name}:`, error.message);
+            }
+        }
         
-        // 1. FIRST IMPORT BOOTCAMPS
+        // 2. FIRST IMPORT BOOTCAMPS
         console.log('🚀 Importing bootcamps...'.blue);
         for (let i = 0; i < bootcamps.length; i++) {
             try {
@@ -303,7 +332,7 @@ const importData = async () => {
             }
         }
         
-        // 2. THEN IMPORT COURSES WITH UPDATED BOOTCAMP IDs
+        // 3. THEN IMPORT COURSES WITH UPDATED BOOTCAMP IDs
         console.log('\n📚 Importing courses...'.blue);
         for (let i = 0; i < courses.length; i++) {
             try {
@@ -357,6 +386,7 @@ const deleteData = async () => {
     try {
         await Bootcamp.deleteMany();
         await Course.deleteMany(); // Fixed: Use Course instead of course
+        await User.deleteMany(); // Also clear users
 
         console.log('Data Destroyed...'.red.inverse);
         process.exit();
