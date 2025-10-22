@@ -1,0 +1,1443 @@
+{
+	"info": {
+		"_postman_id": "e08e56ec-2e91-45cf-b1d2-fa54954f833b",
+		"name": "DevCamper-API",
+		"description": "Backend API for thte DevCamper for HUSSAIN , application to mange bootcamps , courses .and authencation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45767066"
+	},
+	"item": [
+		{
+			"name": "Course",
+			"item": [
+				{
+					"name": "Coures",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/courses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"courses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Courses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/bootcamps/68f51e968411cad42885ffa0/courses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"bootcamps",
+								"68f51e968411cad42885ffa0",
+								"courses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Courses-By-id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/courses/68f4cb9d62cee327674b3c9e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"courses",
+								"68f4cb9d62cee327674b3c9e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add-bootcamps-id-courses",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Full Stack Web Development\",\n    \"description\": \"In this course you will learn full stack web development, first learning all about the frontend with HTML/CSS/JS/Vue and then the backend with Node.js/Express/MongoDB\",\n    \"weeks\": 12,\n    \"tuition\": 10000,\n    \"minimumSkill\": \"intermediate\",\n    \"scholarhipsAvailable\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/bootcamps/68f7198c9812b5de965ee740/courses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"bootcamps",
+								"68f7198c9812b5de965ee740",
+								"courses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-bootcamps-id-courses",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"weeks\": \"8\",\n    \"tuition\": 99999\n    // \"minimumSkill\": \"Advance updated\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/courses/68f4e7469c4063e4f9e0afac",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"courses",
+								"68f4e7469c4063e4f9e0afac"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete-Course-by-Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/courses/68f4e7469c4063e4f9e0afac",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"courses",
+								"68f4e7469c4063e4f9e0afac"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Get All Coures"
+		},
+		{
+			"name": "Bootcamp",
+			"item": [
+				{
+					"name": "Delete Bootcamp",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZjY4NTk1ZTczNzRhMTkzZGJkM2M3ZCIsImlhdCI6MTc2MDk4ODMxMSwiZXhwIjoxNzYzNTgwMzExfQ.jl4CKUSOAS8GjDkgidDG3Je3WqUEG6fCOHCIGuJLt1o",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/bootcamps/68f680fee7374a193dbd3c7b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"bootcamps",
+								"68f680fee7374a193dbd3c7b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Bootcamp",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/bootcamps",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"bootcamps"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "radious",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/bootcamps/radius/01854/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"bootcamps",
+								"radius",
+								"01854",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "debug-locations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/bootcamps/debug/locations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"bootcamps",
+								"debug",
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Location-state",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/api/v1/bootcamps?location.city=Boston&housing=true",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bootcamps"
+							],
+							"query": [
+								{
+									"key": "location.city",
+									"value": "Boston"
+								},
+								{
+									"key": "housing",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "average-Cost-filter",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/api/v1/bootcamps?averageCost[lte]=50000",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bootcamps"
+							],
+							"query": [
+								{
+									"key": "averageCost[lte]",
+									"value": "50000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "name-description-etc-filter",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/api/v1/bootcamps?select=name,description",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bootcamps"
+							],
+							"query": [
+								{
+									"key": "select",
+									"value": "name,description"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Careers-Business-filter",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/api/v1/bootcamps?careers[in]=Business",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bootcamps"
+							],
+							"query": [
+								{
+									"key": "careers[in]",
+									"value": "Business"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pagination-with-item name-filter",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/api/v1/bootcamps?limit=4&select=name",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bootcamps"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "4"
+								},
+								{
+									"key": "select",
+									"value": "name"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Bootcamp",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/bootcamps/68f3bd385d82972d610e2812",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bootcamps",
+								"68f3bd385d82972d610e2812"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Bootcamp",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZjcyMjI4Yjk2MjI4YjUxY2MzNDliMSIsImlhdCI6MTc2MTAyNjYxNiwiZXhwIjoxNzYzNjE4NjE2fQ.mJg0W3u8_6x1thOICl3HN3QXKGP3U00WTRkWyvfx0nY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"housing\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/bootcamps/68f680fee7374a193dbd3c7b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"bootcamps",
+								"68f680fee7374a193dbd3c7b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Photo",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/addmin/Downloads/Fahim - hussain  file  /image/231.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/bootcamps/68f51e968411cad42885ffa0/photo",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bootcamps",
+								"68f51e968411cad42885ffa0",
+								"photo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Bootcamp",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Zjc4OTUyYjg2Y2ExYjQ4YzQ4YTE2ZCIsImlhdCI6MTc2MTA1MzEwMSwiZXhwIjoxNzYzNjQ1MTAxfQ.7f_0sIuYOzMeN1BAJVM30o0oT9_adVBnAYoACOhSuVE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Zjc4OTUyYjg2Y2ExYjQ4YzQ4YTE2ZCIsImlhdCI6MTc2MTA1MzEwMSwiZXhwIjoxNzYzNjQ1MTAxfQ.7f_0sIuYOzMeN1BAJVM30o0oT9_adVBnAYoACOhSuVE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\n//     \"user\": \"5c8a1d5b0190b214360dc031\",\n//     \"name\": \"Codemasters\",\n//     \"description\": \"Is coding your passion? Codemasters will give you the skills and the tools to become the best developer possible. We specialize in full stack web development and data science\",\n//     \"website\": \"https://codemasters.com\",\n//     \"phone\": \"(333) 333-3333\",\n//     \"email\": \"enroll@codemasters.com\",\n//     \"address\": \"85 South Prospect Street Burlington VT 05405\",\n//     \"careers\": [\n//         \"Web Development\",\n//         \"Data Science\",\n//         \"Business\"\n//     ],\n//     \"housing\": false,\n//     \"jobAssistance\": false,\n//     \"jobGuarantee\": false,\n//     \"acceptGi\": false,\n//     \"averageCost\": 80000\n// }\n//________________________\n{\n    \"user\": \"68f78952b86ca1b48c48a16d\",\n    \"name\": \"ModernTech Bootcamp updated\",\n    \"description\": \"ModernTech has one goal, and that is to make you a rockstar developer and/or designer with a six figure salary. We teach both development and UI/UX\",\n    \"website\": \"https://moderntech.com\",\n    \"phone\": \"(222) 222-2222\",\n    \"email\": \"enroll@moderntech.com\",\n    \"address\": \"220 Pawtucket St, Lowell, MA 01854\",\n    \"careers\": [\n        \"Web Development\",\n        \"UI/UX\",\n        \"Mobile Development\"\n    ],\n    \"housing\": false,\n    \"jobAssistance\": true,\n    \"jobGuarantee\": false,\n    \"acceptGi\": true\n}\n//_____________________________\n// {\n    \n//     \"name\": \"ModernTech Bootcamp\",\n//     \"description\": \"Devworks is a full stack JavaScript Bootcamp located in the heart of Boston that focuses on the technologies you need to get a high paying job as a web developer\",\n//     \"website\": \"https://devworks.com\",\n//     \"phone\": \"(111) 111-1111\",\n//     \"email\": \"enroll@devworks.com\",\n//     \"address\": \"233 Bay State Rd Boston MA 02215\",\n//     \"careers\": [\n//         \"Web Development\",\n//         \"UI/UX\",\n//         \"Business\"\n//     ],\n//     \"housing\": true,\n//     \"jobAssistance\": true,\n//     \"jobGuarantee\": false,\n//     \"acceptGi\": true\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/bootcamps",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"bootcamps"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register-User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\n//     \"name\": \"John Doe\",\n//      \"email\": \"john2@example.com\",\n//     \"password\": \"123456\",\n//     \"role\": \"user\"\n// }\n// {\n//     \"_id\": \"5d7a514b5d2c12c7449be045\",\n//     \"name\": \"John Doe\",\n//     \"email\": \"john@gmail.com\",\n//     \"role\": \"publisher\",\n//     \"password\": \"123456\"\n// }\n\n// {\n//     \"name\": \"fahim hussain\",\n//     \"email\": \"fahimhussain@gmail.com\",\n//     \"role\": \"publisher\",\n//     \"password\": \"123456\"\n// }\n\n\n{\n    \"name\": \"fahim hussain2\",\n    \"email\": \"newuser@example.com\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login-User",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(\"Login request starting...\");",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\n//     \"_id\": \"5d7a514b5d2c12c7449be042\",\n//     \"name\": \"Admin Account\",\n//     \"email\": \"admin@gmail.com\",\n//     // \"role\": \"user\",\n//     \"password\": \"123456\"\n// }\n// {\n// \t\"_id\": \"5d7a514b5d2c12c7449be043\",\n// \t\"name\": \"Publisher Account\",\n// \t\"email\": \"publisher@gmail.com\",\n// \t\"role\": \"publisher\",\n// \t\"password\": \"123456\"\n// }\n// {\n// \t\"_id\": \"5d7a514b5d2c12c7449be044\",\n// \t\"name\": \"User Account\",\n// \t\"email\": \"user@gmail.com\",\n// \t\"role\": \"user\",\n// \t\"password\": \"123456\"\n// },\n{\n    \"email\": \"newuser@example.com\",\n  //\"email\":{\"$gt\":\"\"},\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout-User",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(\"Login request starting...\");",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Logged in user via Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZjcyOWM3MGMxZWYyOTk0MGNlMWU2MyIsImlhdCI6MTc2MTAyODU1MSwiZXhwIjoxNzYzNjIwNTUxfQ.7bZDekVvfjYmd7g43mDpRKVXx97vkMPMMu4qGJuwz6g",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgotpassword",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZjcxOTMyYTAxMWZmOTRiYTI5YTI4NSIsImlhdCI6MTc2MTAyNDMwNywiZXhwIjoxNzYzNjE2MzA3fQ.UhzZpDmt_qXOlEM1JtL6oByZt7bGTGogfNeY8f9Cwp4",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"publisher@gmail.com\"\n    // \"password\":\"1234567\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/forgotpassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"forgotpassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update-User-Password-ByEmail",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\":\"1234567\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/resetpassword/10a88e28c923038af5b537d283e9e80f11828520",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"resetpassword",
+								"10a88e28c923038af5b537d283e9e80f11828520"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-User-Details",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZjcxOTMyYTAxMWZmOTRiYTI5YTI4NSIsImlhdCI6MTc2MTAyNDMwNywiZXhwIjoxNzYzNjE2MzA3fQ.UhzZpDmt_qXOlEM1JtL6oByZt7bGTGogfNeY8f9Cwp4",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Publisher Account\",\n    \"email\": \"publisher@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/updatedetails",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"updatedetails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create-New-Password",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZjcxOTMyYTAxMWZmOTRiYTI5YTI4NSIsImlhdCI6MTc2MTAyNDMwNywiZXhwIjoxNzYzNjE2MzA3fQ.UhzZpDmt_qXOlEM1JtL6oByZt7bGTGogfNeY8f9Cwp4",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    // \"email\": \"publisher@gmail.com\",\n    \t\"currentPassword\": \"1234567\",\n        \"newPassword\":\"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/auth/updatepassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"updatepassword"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "All-Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZjcyYzVkZGRmZWMwNTQ0MGQ3MDA4MCIsImlhdCI6MTc2MTA0MTUxMSwiZXhwIjoxNzYzNjMzNTExfQ.ir-Px3ObBhSbGAuGIaMzQFODuwEfA6R5rs2Xz10TSJg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZjcyYzVkZGRmZWMwNTQ0MGQ3MDA4MCIsImlhdCI6MTc2MTA0MTUxMSwiZXhwIjoxNzYzNjMzNTExfQ.ir-Px3ObBhSbGAuGIaMzQFODuwEfA6R5rs2Xz10TSJg",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "single-user-By-ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZjcyYzVkZGRmZWMwNTQ0MGQ3MDA4MCIsImlhdCI6MTc2MTA0MTUxMSwiZXhwIjoxNzYzNjMzNTExfQ.ir-Px3ObBhSbGAuGIaMzQFODuwEfA6R5rs2Xz10TSJg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Zjc2ZjUyYjM4OTk3NDliODQ2MDZmOSIsImlhdCI6MTc2MTA1MTYwOSwiZXhwIjoxNzYzNjQzNjA5fQ.b4068N9mhBYKpeSpzerH9oLq04fdrP2xwJspm2odFV8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/users/68f72c5fddfec05440d700a0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"68f72c5fddfec05440d700a0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZjcyYzVkZGRmZWMwNTQ0MGQ3MDA4MCIsImlhdCI6MTc2MTA0MTUxMSwiZXhwIjoxNzYzNjMzNTExfQ.ir-Px3ObBhSbGAuGIaMzQFODuwEfA6R5rs2Xz10TSJg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZjcyYzVkZGRmZWMwNTQ0MGQ3MDA4MCIsImlhdCI6MTc2MTA0MTUxMSwiZXhwIjoxNzYzNjMzNTExfQ.ir-Px3ObBhSbGAuGIaMzQFODuwEfA6R5rs2Xz10TSJg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"fahimhussain\",\n    \"email\": \"fahimhussain@gmail.com\",\n    \"password\": \"123456\" \n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-user Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZjcyYzVkZGRmZWMwNTQ0MGQ3MDA4MCIsImlhdCI6MTc2MTA0MTUxMSwiZXhwIjoxNzYzNjMzNTExfQ.ir-Px3ObBhSbGAuGIaMzQFODuwEfA6R5rs2Xz10TSJg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZjcyYzVkZGRmZWMwNTQ0MGQ3MDA4MCIsImlhdCI6MTc2MTA0MTUxMSwiZXhwIjoxNzYzNjMzNTExfQ.ir-Px3ObBhSbGAuGIaMzQFODuwEfA6R5rs2Xz10TSJg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"fahimhussain updated\",\n    \"email\": \"fahimhussain@gmail.com\",\n    \"password\": \"123456\" \n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/users/68f763911f86a5a35af6ea55",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"68f763911f86a5a35af6ea55"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reviews",
+			"item": [
+				{
+					"name": "Reviews",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZjcyYzVkZGRmZWMwNTQ0MGQ3MDA4MCIsImlhdCI6MTc2MTA0MTUxMSwiZXhwIjoxNzYzNjMzNTExfQ.ir-Px3ObBhSbGAuGIaMzQFODuwEfA6R5rs2Xz10TSJg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Tyep",
+								"value": "application/json",
+								"description": "JSON Type",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZjcyYzVkZGRmZWMwNTQ0MGQ3MDA4MCIsImlhdCI6MTc2MTA0MTUxMSwiZXhwIjoxNzYzNjMzNTExfQ.ir-Px3ObBhSbGAuGIaMzQFODuwEfA6R5rs2Xz10TSJg",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/reviews",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reviews-For-Bootcamp",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/bootcamps/68f78949d1c88863ba28b52a/reviews",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"bootcamps",
+								"68f78949d1c88863ba28b52a",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reviews-For-Bootcamp-with-ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Zjc4OTUyYjg2Y2ExYjQ4YzQ4YTE2ZCIsImlhdCI6MTc2MTA1Mzc2OSwiZXhwIjoxNzYzNjQ1NzY5fQ.m9_wxbZ8-ydbQQk41xqKXOt4VZNMLu2TNbOlqxfJ_d0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/reviews/68f78949d1c88863ba28b52a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"reviews",
+								"68f78949d1c88863ba28b52a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add-Review-in-Bootcamps",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Nice Bootcamp updated with defferent email\",\n    \"text\":\"i learning a lot\",\n    \"rating\":8\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/bootcamps/68f78acbb86ca1b48c48a180/reviews",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"bootcamps",
+								"68f78acbb86ca1b48c48a180",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update-Reviews",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Zjc4OTUyYjg2Y2ExYjQ4YzQ4YTE2ZCIsImlhdCI6MTc2MTA1Mzc2OSwiZXhwIjoxNzYzNjQ1NzY5fQ.m9_wxbZ8-ydbQQk41xqKXOt4VZNMLu2TNbOlqxfJ_d0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Nice Bootcamp updated with defferent email updated\",\n    \"text\":\"i learning a lot\",\n    \"rating\":8\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/reviews/68f78b04b86ca1b48c48a184",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"reviews",
+								"68f78b04b86ca1b48c48a184"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reviews-Delete-ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4Zjc4OTUyYjg2Y2ExYjQ4YzQ4YTE2ZCIsImlhdCI6MTc2MTA1NDY2NCwiZXhwIjoxNzYzNjQ2NjY0fQ.HSnoTQLa2E7FRt45o9PJUPDUP2xJLyDfBCECm6CvdC8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/reviews/68f78b04b86ca1b48c48a184",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"reviews",
+								"68f78b04b86ca1b48c48a184"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
